@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="{{url_for('static', filename='css/header.css')}}">
+<style>
+</style>
+<title>Accueil</title>
+{%block css%}
+
+{%endblock%}
+</head>
+<body>
+<header>
+    <a href="/">Accueil</a>
+    <div class="dropdown">
+        <a>Jeu</a>
+        <div class="dropdown-content">
+            <a href="/game1">Une image</a>
+            <a href="/game2">Plusieurs images</a>
+        </div>
+    </div>
+    <a href="/exploration">Exploration du jeu de données</a>
+    <a href="/stats">Statistiques</a>
+    <a href="/help">Aide & Ressources</a>
+</header>
+</body>
+{%block header%}
+
+{%endblock%}
+</html>
