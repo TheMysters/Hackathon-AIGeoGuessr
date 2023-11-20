@@ -1,0 +1,69 @@
+*{
+    font-family: "Verdana", sans-serif !important;
+}
+
+body{
+    margin: 0;
+}
+
+header{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    height: 10vh !important;
+    width: 100% !important;
+    position: sticky !important;
+    top: 0 !important;
+    border-bottom: solid 1px rgba(121, 119, 119, 0.2) !important;
+    background-color: rgb(124, 124, 124) !important;
+    z-index: 10000 !important;
+}
+
+header a{
+    text-decoration: none !important;
+    color: white;
+    font-size: 3vh !important;
+    margin: 0 70px !important;
+    font-weight: normal !important;
+    font-family: "Verdana" !important;
+}
+
+header a:hover, .dropdown-content a:hover {
+    color: blue;
+}
+
+header .dropdown {
+    position: relative;
+}
+
+header .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgb(124, 124, 124);
+    width: auto - 20px;
+    z-index: 1;
+}
+
+header .dropdown:hover .dropdown-content {
+    display: block;
+}
+
+header .dropdown-content a {
+    text-align: left;
+    font-size: 2vh !important;
+    color: white;
+    padding: 8px 10px;
+    text-decoration: none;
+    display:block;
+}
+
+@media(orientation: portrait){
+
+    header{
+        height: 5vh !important;
+    }
+
+    header a{
+        font-size: 1vh !important;
+    }
+}
