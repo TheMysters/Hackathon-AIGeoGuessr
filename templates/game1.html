@@ -13,6 +13,14 @@
         align-items: center;
         flex-direction: column;
     }
+    #map-container {
+        width: 90%;
+        height: 800px; 
+        border: 2px solid black;  /* Set the desired border size and color */
+        overflow: hidden;  /* Hide overflow content */
+        margin-left: auto;
+        margin-right: auto;
+    }
 </style>
 {% endblock %}
 
@@ -24,15 +32,20 @@
         <button type="button" id="predictButton" onclick="predict()">Prédire</button>
     </form>
     
-    <div id="map"></div>
+    <div id="map-container">
+        <iframe id="map-iframe"></iframe>
+    </div>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
         // Initialiser la carte avec un emplacement et un niveau de zoom
-        var map = L.map('map').setView([0, 0], 2);
+        var map = L.map('map-container').setView([0, 0], 2);
 
         // Ajouter une couche de carte OpenStreetMap à la carte
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca target=\"_blank\" href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca target=\"_blank\" href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 12, "maxZoom": 12, "minZoom": 2, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            )
+            .addTo(map);
 
         var marker = L.marker([0, 0], {
                     draggable: false
