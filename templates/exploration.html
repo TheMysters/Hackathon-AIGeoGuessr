@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}Visualisation de Données{% endblock %}
+
+{% block css %}
+<style>
+    .content-container {
+        margin: 0 auto;
+        max-width: 90%;
+        padding: 0 20px;
+    }
+
+    .image-container {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .image-title, .heatmap-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .image-description {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 15px;
+    }
+
+    .heatmap-frame {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+    <div class="content-container">
+        <!-- Première Image -->
+        <div class="image-container">
+            <h3 class="image-title">Nuage de Mots des Pays présents dans le dataset</h3>
+            <img src="{{ url_for('static', filename='VisualisationDeDonnee/Entree/nuage_mots_pays.png') }}" alt="Nuage de Mots des Pays">
+            <p class="image-description">Ce graphique représente les pays présents dans notre dataset, avec la taille de la police correspondant au nombre de points du pays. Il est important de préciser que l'objectif de l'IA est de jouer en premier lieu à GeoGuessr, et donc que tous les pays ne seront pas représentés (comme dans le jeu). Le problème de cette visualisation est que la taille du pays n'est pas prise en compte.
+            </p>
+        </div>
+
+        <!-- Deuxième Image -->
+        <div class="image-container">
+            <h3 class="image-title">Ratio de Représentation des Pays par leur surface</h3>
+            <img src="{{ url_for('static', filename='VisualisationDeDonnee/Entree/ratio_representation_pays_10_points.png') }}" alt="Ratio de Représentation des Pays">
+            <p class="image-description">Cette fois-ci, nous avons pris en compte la superficie des pays (ainsi que les pays ayant minimum 10 points GPS dans le dataset). Cet histogramme représente la moyenne normalisée du ratio de points dans le dataset par rapport à la superficie des pays. De cette manière, nous remarquons que les Pays-Bas sont presque cinq fois plus représentés que la moyenne. Cette différence s'explique par la manière dont le dataset est généré (voir la section d'aide et de ressources qui explique le processus), car nous créons des grilles de quelques kilomètres carrés de manière aléatoire dans le monde. En conséquence, les pays ayant une densité de routes plus élevée seront mieux représentés que les pays ayant des routes plus espacées. Ce graphique pourrait également nous donner l'impression que les États-Unis sont sous-représentés, mais comme nous l'avons vu dans le graphique précédent, c'est le pays ayant le plus grand nombre de points.
+            </p>
+        </div>
+
+        <!-- Heatmap -->
+        <h3 class="heatmap-title">Heatmap interactive des points du dataset</h3>
+        <div class="heatmap-frame">
+            <iframe src="{{ url_for('static', filename='VisualisationDeDonnee/Entree/heatmap_custom.html') }}" width="100%" height="600px" frameborder="0"></iframe>
+        </div>
+    </div>
+{% endblock %}
