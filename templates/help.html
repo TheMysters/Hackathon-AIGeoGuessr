@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Aide & Ressources{% endblock %}
+
+{% block content %}
+    
+<h1 id="-tat-de-l-art">État de l&#39;art</h1>
+
+    <p>Globalement, les CNNs sont utilisés pour deux types de tâches:</p>
+
+    <ul>
+    <li><p><strong>Classification</strong> : Dans une tâche de classification, le CNN attribue une classe à l&#39;entrée en produisant une sortie qui représente la probabilité d&#39;appartenance de l&#39;entrée à chaque classe prédéfinie.</p>
+    </li>
+    <li><p><strong>Régression</strong> : D&#39;autre part, les CNN peuvent être utilisés pour des tâches de régression où la sortie n&#39;est pas une classe, mais plutôt un vecteur de valeurs continues.</p>
+    </li>
+    </ul>
+
+    <p>Notre objectif étant d&#39;associer des coordonnées GPS à une image, nous allons donc faire de la <strong>régression</strong>.</p>
+        
+    <h2 id="-tude-des-mod-les">Étude des modèles</h2>
+        <p>Voici des modèles CNN qui pourraient être utilisés pour faire de la régression:</p>
+        
+        <ul>
+        <li><a href="https://medium.com/codex/lenet-5-complete-architecture-84c6d08215f9">LeNet-5</a></li>
+        <li><a href="https://d2l.ai/chapter_convolutional-modern/alexnet.html">AlexNet</a></li>
+        <li><a href="https://medium.com/@mygreatlearning/everything-you-need-to-know-about-vgg16-7315defb5918">VGG-16/VGG-19</a></li>
+        <li><a href="https://towardsdatascience.com/understanding-and-visualizing-resnets-442284831be8">ResNet</a></li>
+        <li><a href="https://pytorch.org/hub/pytorch_vision_densenet/">DenseNet</a></li>
+        </ul>
+
+        <h3 id="lenet-5">LeNet-5</h3>
+
+            <p>Taille d&#39;image en entrée fixée à 28x28 pixels, car ce modèle est principalement utilisé pour la reconnaissance de caractères.</p>
+        
+        <h3 id="alexnet">AlexNet</h3>
+
+            <p>Amélioration du LeNet. Taille d&#39;image en entrée 224x224.</p>
+
+        <h3 id="vgg16-vgg19">VGG16/VGG19</h3>
+        
+            <p>Input à 224x224. Choix entre de modèles à 16 ou 19 couches.</p>
+        
+        <h3 id="resnet">ResNet</h3>
+        
+            <p>Input variable. Près de 34 couches, mais adaptable. </p>
+
+        <h3 id="densenet">DenseNet</h3>
+            
+            <p>Contrairement aux autres qui utilisent des couches appliquant des convolutions, ce réseau est basé uniquement sur une succession de couches denses. Il prend également en entrée des images d&#39;au moins 224x224.</p>
+
+    <h2 id="-tude-d-une-solution-propos-e">Étude d&#39;une solution proposée</h2>
+
+        <p>Étudions les outils utilisés par une <a href="https://nirvan66.github.io/geoguessr.html">solution</a> proposée.</p>
+        
+        <p>Les modèles utilisés sont basés sur du ResNet et du LSTM. Les images en entrée sont en 300x300 pixels.</p>
+
+
+{% endblock %}

@@ -34,5 +34,9 @@ def predict1():
 def exploration():
     return render_template("exploration.html")
 
+@app.route('/help')
+def help():
+    return render_template("help.html")
+
 if __name__ == '__main__':
     app.run(debug=True)
