@@ -59,6 +59,50 @@
             <p class="image-description">Cette fois-ci, nous avons pris en compte la superficie des pays (ainsi que les pays ayant minimum 10 points GPS dans le dataset). Cet histogramme représente la moyenne normalisée du ratio de points dans le dataset par rapport à la superficie des pays. De cette manière, nous remarquons que les Pays-Bas sont presque cinq fois plus représentés que la moyenne. Cette différence s'explique par la manière dont le dataset est généré (voir la section d'aide et de ressources qui explique le processus), car nous créons des grilles de quelques kilomètres carrés de manière aléatoire dans le monde. En conséquence, les pays ayant une densité de routes plus élevée seront mieux représentés que les pays ayant des routes plus espacées. Ce graphique pourrait également nous donner l'impression que les États-Unis sont sous-représentés, mais comme nous l'avons vu dans le graphique précédent, c'est le pays ayant le plus grand nombre de points.
             </p>
         </div>
+        <!-- Cloroplethe -->
+        <div class="country-selector-container">
+            <h3 class="image-title">Carte chloroplethe par pays</h3>
+            <label for="country-select">Choisissez un pays :</label>
+            <select id="country-select" onchange="updateCountryMap()">
+                <!-- Les options seront ajoutées ici via JavaScript -->
+            </select>
+        </div>
+        
+        <div class="image-container">
+            <img id="country-map" src="" alt="Carte du pays sélectionné" style="max-width:100%; height:auto;">
+        </div>
+
+        <script>
+            function updateCountryMap() {
+                var selectedCountry = document.getElementById('country-select').value;
+                var imagePath = "/static/VisualisationDeDonnee/Entree/cloroplethe/chloroplethe " + selectedCountry + ".png";
+                document.getElementById('country-map').src = imagePath;
+            }
+
+            // Fonction pour initialiser les options du menu déroulant
+            function initializeCountryOptions(countries) {
+                var selectElement = document.getElementById('country-select');
+                countries.forEach(function(country, index) {
+                    var option = document.createElement('option');
+                    option.value = country;
+                    option.text = country;
+                    selectElement.appendChild(option);
+
+                    // Définir la valeur par défaut (par exemple, le premier pays dans la liste)
+                    if (index === 0) {
+                        selectElement.value = country;
+                    }
+                });
+            }
+
+            // Exemple de liste de pays
+            initializeCountryOptions(['Argentina', 'Australia', 'Brazil', 'Canada', 'Chile', 'Colombia', 'Finland', 'France', 'Germany', 'India', 'Indonesia', 'Italy', 'Japan', 'Mexico', 'Netherlands', 'Norway', 'Philippines', 'Poland', 'Romania', 'Russia', 'South Africa', 'Spain', 'Sweden', 'Thailand', 'Turkey', 'United Kingdom', 'United States']);
+
+            // Charger l'image par défaut
+            updateCountryMap();
+        </script>
+
+        
 
         <!-- Heatmap -->
         <h3 class="heatmap-title">Heatmap interactive des points du dataset</h3>
