@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}Jouer{% endblock %}
+
+{% block css %}
+<style>
+    #map {
+        height: 600px;
+    }
+    #marker-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <form id="marker-container" enctype="multipart/form-data" action="/predict1" method="POST">
+        <input type="file" name="image" accept=".png, .jpeg, .jpg" id="fileInput" onchange="enablePredictButton()" />
+        <button type="button" id="predictButton" onclick="predict()">Prédire</button>
+    </form>
+    
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // Initialiser la carte avec un emplacement et un niveau de zoom
+        var map = L.map('map').setView([0, 0], 2);
+
+        // Ajouter une couche de carte OpenStreetMap à la carte
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+        var marker = L.marker([0, 0], {
+                    draggable: false
+                }).addTo(map);
+        
+        marker.setOpacity(0);
+
+        function enablePredictButton() {
+            var fileInput = document.getElementById('fileInput');
+            var predictButton = document.getElementById('predictButton');
+
+            // Enable the "Prédire" button if a file is selected
+            predictButton.disabled = !fileInput.files || fileInput.files.length === 0;
+        }
+
+        enablePredictButton()
+
+        function predict() {
+            var predictButton = document.getElementById('predictButton');
+            predictButton.disabled = true;
+
+            if (map.hasLayer(marker)) {
+                // If a marker exists, remove it from the map
+                map.removeLayer(marker);
+            }
+            // Create a FormData object to send the file
+            var formData = new FormData(document.getElementById('marker-container'));
+
+            fetch('/predict1', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.result);
+                var lat = data.result[0];
+                var lng = data.result[1];
+
+                marker = L.marker([lat, lng], {
+                    draggable: false
+                }).addTo(map);
+                marker.setOpacity(1);
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+{% endblock %}
