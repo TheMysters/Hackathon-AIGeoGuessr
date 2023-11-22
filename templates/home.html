@@ -3,23 +3,34 @@
 {% block title %}Accueil{% endblock %}
 
 {% block content %}
-<div id="presentation-page">
+<div class="section-titre">
+    <h1 class="titre-moderne">WHERE AM I</h1>
+    <button id="start-button" class="button2" onclick="startGame()">Démarrer le jeu</button>
+</div>
+<div class="bloc-presentation">
     <h1>Présentation du sujet</h1>
     <p>Bienvenue sur notre page dédiée à GeoGuessr, où l'exploration du monde rencontre l'intelligence artificielle. Notre projet repousse les limites du jeu en utilisant un modèle d'IA avancé qui prédit la position sur le globe en se basant sur une image, offrant ainsi une nouvelle dimension au jeu passionnant de GeoGuessr.</p>
+</div>
+    
+<div class="bloc-presentation">
+    
     <h2>Présentation de GeoGuessr</h2>
     <p>GeoGuessr est une expérience de jeu unique qui teste vos compétences géographiques en vous plaçant virtuellement n'importe où sur la planète. Utilisant les images de Google Maps, le jeu vous invite à explorer des environnements inconnus et à deviner votre emplacement en plaçant des marqueurs sur la carte du monde.</p>
     
+</div>
+
+<div class="bloc-presentation">
     <h2>Présentation du fonctionnement du jeu</h2>
     <p>Découvrez une nouvelle façon de jouer avec GeoGuessr grâce à notre technologie d'IA. Les modes de jeu standard, défis, et multijoueur prennent une nouvelle dimension lorsque l'IA devient votre alliée dans la découverte du monde. Utilisez les informations prédictives pour surpasser vos adversaires et améliorer vos compétences en géographie virtuelle.</p>
-
+    
     <p>Que vous soyez un amateur de technologie ou un joueur passionné, GeoGuessr avec l'IA offre une expérience de jeu unique qui combine exploration, divertissement et innovation.</p>
-
-    <button id="start-button" onclick="startGame()">Démarrer le jeu</button>
+</div>
+    
 </div>
 
 <!-- Heatmap -->
-<h3 class="heatmap-title">Heatmap interactive des points du dataset</h3>
-<div class="heatmap-frame">
+<div class="section-heatmap">
+    <h3 class="heatmap-title">Heatmap interactive des points du dataset</h3>
     <iframe src="{{ url_for('static', filename='VisualisationDeDonnee/Entree/heatmap_custom.html') }}" width="85%" height="1000px" frameborder="20"></iframe>
 </div>
     <style>

@@ -1,0 +1,10 @@
+#06caf1 bleu tres clair
+#07ccee bleu clair
+#06caf1 bleu foncé
+
+#feb00d orange clair
+#fb7b10 orange
+#ef3806 orange foncé
+
+#f61137 rouge rose
+#c90127 rouge foncé

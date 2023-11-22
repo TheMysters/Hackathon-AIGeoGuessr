@@ -10,7 +10,7 @@ header{
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
-    height: 10vh !important;
+    height: 8vh !important;
     width: 100% !important;
     position: sticky !important;
     top: 0 !important;
@@ -23,13 +23,13 @@ header a{
     text-decoration: none !important;
     color: white;
     font-size: 3vh !important;
-    margin: 0 70px !important;
+    margin: 0 50px !important;
     font-weight: normal !important;
     font-family: "Verdana" !important;
 }
 
 header a:hover, .dropdown-content a:hover {
-    color: blue;
+    color: #c90127;
 }
 
 header .dropdown {
@@ -66,4 +66,20 @@ header .dropdown-content a {
     header a{
         font-size: 1vh !important;
     }
+}
+
+.header-logo {
+    height: 80%; /* Réduire légèrement par rapport à la hauteur de l'en-tête pour un meilleur rendu */
+    width: auto; /* Conserver le ratio d'aspect */
+}
+
+/* Ajustements pour les médias en orientation portrait */
+@media(orientation: portrait){
+    .header-logo {
+        height: 80%; /* Vous pouvez ajuster ce pourcentage si nécessaire */
+    }
+}
+
+.Texture{
+    opacity: 0.8;
 }
