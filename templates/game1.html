@@ -103,6 +103,12 @@
                 }).addTo(map);
             } 
             else {
+                if (marker2) {
+                    map.removeLayer(marker2);
+                }
+                marker2 = L.marker([0, 0], {
+                    draggable: false
+                }).addTo(map);
                 marker2.setOpacity(0);
             }
 
@@ -133,21 +139,23 @@
         }
         function getDistance(){
             if (map.hasLayer(marker) && map.hasLayer(marker2)) {
-                // Obtenir les coordonnées des deux marqueurs
-                var latlng1 = marker.getLatLng();
-                var latlng2 = marker2.getLatLng();
+                var opacityMarker1 = marker.options.opacity;
+                var opacityMarker2 = marker2.options.opacity;
 
-                // Créer une ligne entre les deux marqueurs
-                line = L.polyline([latlng1, latlng2], { color: 'red' }).addTo(map);
+                if (opacityMarker1 === 1 && opacityMarker2 === 1) {
+                    // Obtenir les coordonnées des deux marqueurs
+                    var latlng1 = marker.getLatLng();
+                    var latlng2 = marker2.getLatLng();
 
-                // Calculer la distance entre les deux points en kilomètres
-                var distanceInKm = latlng1.distanceTo(latlng2) / 1000;
-                line.bindTooltip('Distance : ' + distanceInKm.toFixed(2) + ' km').openTooltip();
-                // Afficher la distance dans la console
-                console.log('Distance entre les deux points : ' + distanceInKm + ' km');
-            } 
-            else {
-                console.log('Les deux marqueurs ne sont pas présents sur la carte.');
+                    // Créer une ligne entre les deux marqueurs
+                    line = L.polyline([latlng1, latlng2], { color: 'red' }).addTo(map);
+
+                    // Calculer la distance entre les deux points en kilomètres
+                    var distanceInKm = latlng1.distanceTo(latlng2) / 1000;
+                    line.bindTooltip('Distance : ' + distanceInKm.toFixed(2) + ' km').openTooltip();
+                    // Afficher la distance dans la console
+                    console.log('Distance entre les deux points : ' + distanceInKm + ' km');
+                }
             }
         }
 </script>

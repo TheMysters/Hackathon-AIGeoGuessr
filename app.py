@@ -44,6 +44,10 @@ def predict1():
 def exploration():
     return render_template("exploration.html")
 
+@app.route('/stats')
+def stats():
+    return render_template("stats.html")
+
 @app.route('/help')
 def help():
     return render_template("help.html")
