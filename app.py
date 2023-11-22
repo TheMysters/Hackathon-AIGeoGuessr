@@ -1,6 +1,11 @@
 from flask import Flask, render_template, jsonify, request
 from flask_caching import Cache
 from fonctions import model_predict
+from PIL import Image
+from keras.preprocessing.image import img_to_array
+from keras.applications.resnet import preprocess_input
+from io import BytesIO
+import numpy as np
 
 app = Flask(__name__)
 
@@ -26,8 +31,13 @@ def predict1():
         return jsonify(error='Empty filename'), 400
 
     image_content = image_file.read()
-    cache.set('image_content', image_content, timeout=300)
-    result = model_predict(image_content)
+    image = Image.open(BytesIO(image_content))
+    image = image.resize((224, 224))
+    image_array = img_to_array(image) / 255.0
+    image_array = np.expand_dims(image_array, axis=0)
+    cache.set('image_array', image_array, timeout=300)
+    result = model_predict(image_array)
+    result = tuple(float(value) for value in result)
     return jsonify(result=result)
 
 @app.route('/exploration')

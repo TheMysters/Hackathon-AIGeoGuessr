@@ -21,11 +21,18 @@
         margin-left: auto;
         margin-right: auto;
     }
+    p {
+        font-size: 24px;
+        font-weight: normal;
+        text-align: center;
+    }
 </style>
 {% endblock %}
 
 {% block content %}
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <p>Utilisez uniquement des images au format JPG</p>
 
     <form id="marker-container" enctype="multipart/form-data" action="/predict1" method="POST">
         <input type="file" name="image" accept=".png, .jpeg, .jpg" id="fileInput" onchange="enablePredictButton()" />
@@ -47,9 +54,17 @@
             )
             .addTo(map);
 
-        var marker = L.marker([0, 0], {
-                    draggable: false
-                }).addTo(map);
+        var iconOptions = {
+            iconUrl: '{{ url_for("static", filename="ikea.png") }}',
+            iconSize: [50, 50]
+        }
+
+        var markerOptions = {
+            draggable: false,
+            icon: L.icon(iconOptions)
+        }
+
+        var marker = L.marker([0, 0], markerOptions).addTo(map);
         
         marker.setOpacity(0);
 
@@ -60,13 +75,39 @@
             // Enable the "Prédire" button if a file is selected
             predictButton.disabled = !fileInput.files || fileInput.files.length === 0;
         }
-
+        var marker2;
+        var line;
         enablePredictButton()
 
         function predict() {
+            if (line && map.hasLayer(line)) {
+                    // If a line exists, remove it from the map
+                    map.removeLayer(line);
+                }
+            var file = fileInput.files[0];
+            var fileName = file.name;
+
+            var match = fileName.match(/([-+]?\d*\.\d+|\d+)/g);
+            if (match && match.length >= 2) {
+                var lat = parseFloat(match[0]);
+                var lng = parseFloat(match[1]);
+
+                // Check if marker2 exists, remove it if it does
+                if (marker2) {
+                    map.removeLayer(marker2);
+                }
+
+                // Create a new marker2
+                marker2 = L.marker([lat, lng], {
+                    draggable: false
+                }).addTo(map);
+            } 
+            else {
+                marker2.setOpacity(0);
+            }
+
             var predictButton = document.getElementById('predictButton');
             predictButton.disabled = true;
-
             if (map.hasLayer(marker)) {
                 // If a marker exists, remove it from the map
                 map.removeLayer(marker);
@@ -84,13 +125,31 @@
                 var lat = data.result[0];
                 var lng = data.result[1];
 
-                marker = L.marker([lat, lng], {
-                    draggable: false
-                }).addTo(map);
+                marker = L.marker([lat, lng], markerOptions).addTo(map);
                 marker.setOpacity(1);
+                getDistance();
             })
             .catch(error => console.error('Error:', error));
         }
-    </script>
+        function getDistance(){
+            if (map.hasLayer(marker) && map.hasLayer(marker2)) {
+                // Obtenir les coordonnées des deux marqueurs
+                var latlng1 = marker.getLatLng();
+                var latlng2 = marker2.getLatLng();
+
+                // Créer une ligne entre les deux marqueurs
+                line = L.polyline([latlng1, latlng2], { color: 'red' }).addTo(map);
+
+                // Calculer la distance entre les deux points en kilomètres
+                var distanceInKm = latlng1.distanceTo(latlng2) / 1000;
+                line.bindTooltip('Distance : ' + distanceInKm.toFixed(2) + ' km').openTooltip();
+                // Afficher la distance dans la console
+                console.log('Distance entre les deux points : ' + distanceInKm + ' km');
+            } 
+            else {
+                console.log('Les deux marqueurs ne sont pas présents sur la carte.');
+            }
+        }
+</script>
 </body>
 {% endblock %}
