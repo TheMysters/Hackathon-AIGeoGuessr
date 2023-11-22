@@ -93,10 +93,12 @@
 }
 
 .bloc-presentation {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.6);
     padding: 20px; /* Espace intérieur */
     margin-bottom: 20px; /* Espace entre les blocs */
-    border-radius: 5px; /* Coins arrondis, optionnel */
+    border-radius: 10px; /* Coins arrondis, optionnel */
+    margin-left: 5%;
+    margin-right: 5%;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -105,5 +107,5 @@ body {
     background-image: url('img/background.png');
     background-size: 100%; 
     background-attachment: scroll;
-    background-repeat: no-repeat; 
+    background-repeat: repeat-y; 
 }
