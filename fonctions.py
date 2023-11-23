@@ -8,13 +8,8 @@ import os, re
 from geopy.distance import geodesic
 from geopy.geocoders import Nominatim
 import folium
+from tqdm import tqdm 
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
-
-def model_predict(image_content):
-    loaded_model = load_model()
-    result = loaded_model.predict(image_content) 
-    result_tuple = tuple(result[0])
-    return (result_tuple[0], result_tuple[1])
 
 def haversine_loss(y_true, y_pred):
     lat_true, lon_true = y_true[:, 0], y_true[:, 1]
@@ -32,13 +27,30 @@ def haversine_loss(y_true, y_pred):
     R = 6371  # Rayon de la Terre en kilomètres
     return R * c
 
-def load_model():
+def load_model_DenseNet121():
     with tf.keras.utils.custom_object_scope({'haversine_loss': haversine_loss}):
-        loaded_model = tf.keras.models.load_model("modele/DenseNet_omg/model_checkpoint_DenseNet121_epoch_18.h5")
+        loaded_model = tf.keras.models.load_model("modele/DenseNet121/best_checkpoint_densenet121.h5")
         return loaded_model
+    
+def model_predict_DenseNet121(image_content):
+    loaded_model = load_model_DenseNet121()
+    result = loaded_model.predict(image_content) 
+    result_tuple = tuple(result[0])
+    return (result_tuple[0], result_tuple[1])
 
-def evaluate_model(folder_path):
-    loaded_model = load_model()
+def load_model_ResNetV50():
+    with tf.keras.utils.custom_object_scope({'haversine_loss': haversine_loss}):
+        loaded_model = tf.keras.models.load_model("modele/ResNetV50/best_checkpoint_resnet50.h5")
+        return loaded_model
+    
+def model_predict_ResNetV50(image_content):
+    loaded_model = load_model_ResNetV50()
+    result = loaded_model.predict(image_content) 
+    result_tuple = tuple(result[0])
+    return (result_tuple[0], result_tuple[1])
+
+def evaluate_model_resNet50(folder_path):
+    loaded_model = load_model_ResNetV50()
     with open("historique.csv", 'w', newline='') as csvfile:
         csv_writer = csv.writer(csvfile)
         csv_writer.writerow(['LatitudeOrigine', 'LongitudeOrigine', 'LatitudeModel', 'LongitudeModel', 'DistanceModel', 'LatitudeRandom', 'LongitudeRandom', 'DistanceRandom'])
@@ -66,7 +78,7 @@ def evaluate_model(folder_path):
                     csv_writer.writerow([latitude_origin, longitude_origin, latitude_model, longitude_model, distance_model_km, latitude_random, longitude_random, distance_random_km])
 
 def visualize_evaluation():
-    df = pd.read_csv('historique.csv')
+    df = pd.read_csv('historique_resnet50.csv')
     bin_width = 500
     bins = np.arange(0, df['DistanceModel'].max() + bin_width, bin_width)
 
@@ -76,12 +88,12 @@ def visualize_evaluation():
     mean_model = df['DistanceModel'].mean()
     mean_random = df['DistanceRandom'].mean()
 
-    plt.axvline(x=mean_model, color='red', linestyle='dashed', linewidth=2, label=f'Moyenne du Modèle: {mean_model:.2f}')
-    plt.axvline(x=mean_random, color='green', linestyle='dashed', linewidth=2, label=f'Moyenne Aléatoire: {mean_random:.2f}')
+    plt.axvline(x=mean_model, color='red', linestyle='dashed', linewidth=2, label=f'Moyenne du modèle ResNet50: {mean_model:.2f}')
+    plt.axvline(x=mean_random, color='green', linestyle='dashed', linewidth=2, label=f'Moyenne aléatoire: {mean_random:.2f}')
 
     plt.xlabel('Distance (km)')
-    plt.ylabel('Nombre de Samples')
-    plt.title('Histogramme de DistanceModel et DistanceRandom avec Moyennes')   
+    plt.ylabel('Nombre d\'echantillon')
+    plt.title('Histogramme du modèle ResNet50 et d\'un modèle random')   
 
     plt.legend()
     plt.show()
@@ -120,7 +132,7 @@ def add_country_from_coordinates_model(csv_file): #Utiliser Coord2Country.py de 
     df.to_csv('tt.csv', index=False)
 
 def visualize_evaluation_country(pays_name:str):
-    df = pd.read_csv('historique_pays_all.csv')
+    df = pd.read_csv('historique_resnet50.csv')
     df_us = df[df['PaysOrigine'] == pays_name]
     if df_us.empty:
         print(f"Aucune donnée disponible pour les {pays_name}.")
@@ -160,9 +172,6 @@ def visualize_confused_countries(csv_file, country:str):
 
     plt.show()
 
-#visualize_evaluation_country('India')
-#visualize_confused_countries('historique_pays_all.csv', 'India')
-
 def generate_map(csv_filename, country_name):
     # Charger le fichier CSV
     df = pd.read_csv(csv_filename)
@@ -193,4 +202,5 @@ def generate_map(csv_filename, country_name):
     # Sauvegarder la carte dans un fichier HTML
     m.save("map.html")
 
-#generate_map('historique_pays_all.csv', 'United States')
+#visualize_evaluation_country('United States')
+#generate_map('historique_resnet50.csv', 'United States')

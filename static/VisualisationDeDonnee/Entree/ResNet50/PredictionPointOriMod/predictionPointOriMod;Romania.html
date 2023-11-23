@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_80f9f671580f0d5e49d275dda8e32413 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_80f9f671580f0d5e49d275dda8e32413" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_80f9f671580f0d5e49d275dda8e32413 = L.map(
+                "map_80f9f671580f0d5e49d275dda8e32413",
+                {
+                    center: [44.1156569, 24.3501099],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 2,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_eec49564343e834c155790ef8a5463db = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca target=\"_blank\" href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca target=\"_blank\" href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 12, "maxZoom": 12, "minZoom": 3, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+                );
+        
+    
+                tile_layer_eec49564343e834c155790ef8a5463db.addTo(map_80f9f671580f0d5e49d275dda8e32413);
+    
+            var marker_635927b4df9ad846c757fee70d1ce7a7 = L.marker(
+                [44.1156569, 24.3501099],
+                {}
+            ).addTo(map_80f9f671580f0d5e49d275dda8e32413);
+        
+    
+            var icon_fd9e198d05b3ad7a9705caf5e92fc13a = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_635927b4df9ad846c757fee70d1ce7a7.setIcon(icon_fd9e198d05b3ad7a9705caf5e92fc13a);
+        
+    
+        var popup_c291c92dff4fc03440ab1d92dda5f844 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_ed83f6a248f5f550f711ba6bdb507e02 = $(`<div id="html_ed83f6a248f5f550f711ba6bdb507e02" style="width: 100.0%; height: 100.0%;">Pays d'Origine: Romania</div>`)[0];
+                popup_c291c92dff4fc03440ab1d92dda5f844.setContent(html_ed83f6a248f5f550f711ba6bdb507e02);
+            
+        
+
+        marker_635927b4df9ad846c757fee70d1ce7a7.bindPopup(popup_c291c92dff4fc03440ab1d92dda5f844)
+        ;
+
+        
+    
+    
+            var marker_24f61799d710f7802d99f970e6f3e1e9 = L.marker(
+                [45.178706, 25.8959691],
+                {}
+            ).addTo(map_80f9f671580f0d5e49d275dda8e32413);
+        
+    
+            var icon_804e489c1fa94c711ac4409e41a4966b = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_24f61799d710f7802d99f970e6f3e1e9.setIcon(icon_804e489c1fa94c711ac4409e41a4966b);
+        
+    
+        var popup_ec703b42ecb982eb40323267381edd70 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_d2f500138c35664e544c4d0e6b261705 = $(`<div id="html_d2f500138c35664e544c4d0e6b261705" style="width: 100.0%; height: 100.0%;">Pays d'Origine: Romania</div>`)[0];
+                popup_ec703b42ecb982eb40323267381edd70.setContent(html_d2f500138c35664e544c4d0e6b261705);
+            
+        
+
+        marker_24f61799d710f7802d99f970e6f3e1e9.bindPopup(popup_ec703b42ecb982eb40323267381edd70)
+        ;
+
+        
+    
+    
+            var marker_51d5c755e6fa2c6969273ebdd3aa5de9 = L.marker(
+                [45.8478685, 23.0158116],
+                {}
+            ).addTo(map_80f9f671580f0d5e49d275dda8e32413);
+        
+    
+            var icon_121aefd64757c9cc860d69e661febac1 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_51d5c755e6fa2c6969273ebdd3aa5de9.setIcon(icon_121aefd64757c9cc860d69e661febac1);
+        
+    
+        var popup_7e2a894ac7c2f04acaaacb3b29fefac4 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_e1f00912f6050963cfbfcab53f56ee10 = $(`<div id="html_e1f00912f6050963cfbfcab53f56ee10" style="width: 100.0%; height: 100.0%;">Pays d'Origine: Romania</div>`)[0];
+                popup_7e2a894ac7c2f04acaaacb3b29fefac4.setContent(html_e1f00912f6050963cfbfcab53f56ee10);
+            
+        
+
+        marker_51d5c755e6fa2c6969273ebdd3aa5de9.bindPopup(popup_7e2a894ac7c2f04acaaacb3b29fefac4)
+        ;
+
+        
+    
+    
+            var marker_c74b83e2743cceb84e7b609d4b088185 = L.marker(
+                [46.0639201, 23.5737362],
+                {}
+            ).addTo(map_80f9f671580f0d5e49d275dda8e32413);
+        
+    
+            var icon_4aacd9b27d67c325d4cb3f17c6593d6b = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_c74b83e2743cceb84e7b609d4b088185.setIcon(icon_4aacd9b27d67c325d4cb3f17c6593d6b);
+        
+    
+        var popup_c659e890d9df2c38944ddb0edc4b1541 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_5705b24f996f031f7aaf12cfe311b0cd = $(`<div id="html_5705b24f996f031f7aaf12cfe311b0cd" style="width: 100.0%; height: 100.0%;">Pays d'Origine: Romania</div>`)[0];
+                popup_c659e890d9df2c38944ddb0edc4b1541.setContent(html_5705b24f996f031f7aaf12cfe311b0cd);
+            
+        
+
+        marker_c74b83e2743cceb84e7b609d4b088185.bindPopup(popup_c659e890d9df2c38944ddb0edc4b1541)
+        ;
+
+        
+    
+    
+            var marker_1141e5adbab9633bf57ed2d0598d4eb5 = L.marker(
+                [46.7633176, 24.5160046],
+                {}
+            ).addTo(map_80f9f671580f0d5e49d275dda8e32413);
+        
+    
+            var icon_f49dcb1af0c3694d4251ea7e74e3327f = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_1141e5adbab9633bf57ed2d0598d4eb5.setIcon(icon_f49dcb1af0c3694d4251ea7e74e3327f);
+        
+    
+        var popup_39991f329970ca79c59ec1d88508413e = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_c412801bcf4d4c8b7a6b27164391643f = $(`<div id="html_c412801bcf4d4c8b7a6b27164391643f" style="width: 100.0%; height: 100.0%;">Pays d'Origine: Romania</div>`)[0];
+                popup_39991f329970ca79c59ec1d88508413e.setContent(html_c412801bcf4d4c8b7a6b27164391643f);
+            
+        
+
+        marker_1141e5adbab9633bf57ed2d0598d4eb5.bindPopup(popup_39991f329970ca79c59ec1d88508413e)
+        ;
+
+        
+    
+    
+            var marker_4aba515a45fbf2e177a756aada310e1d = L.marker(
+                [46.7919431, 21.8212992],
+                {}
+            ).addTo(map_80f9f671580f0d5e49d275dda8e32413);
+        
+    
+            var icon_5e4fd734c59787c56881182de6f1c510 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_4aba515a45fbf2e177a756aada310e1d.setIcon(icon_5e4fd734c59787c56881182de6f1c510);
+        
+    
+        var popup_8ac1d4efa5a1114d2de59e7902f65a2a = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_99afc3be902342bde67251d5f36ec2fc = $(`<div id="html_99afc3be902342bde67251d5f36ec2fc" style="width: 100.0%; height: 100.0%;">Pays d'Origine: Romania</div>`)[0];
+                popup_8ac1d4efa5a1114d2de59e7902f65a2a.setContent(html_99afc3be902342bde67251d5f36ec2fc);
+            
+        
+
+        marker_4aba515a45fbf2e177a756aada310e1d.bindPopup(popup_8ac1d4efa5a1114d2de59e7902f65a2a)
+        ;
+
+        
+    
+    
+            var marker_e7c951e8cfff1a3ff415d080b84d49df = L.marker(
+                [46.818897, 8.878304],
+                {}
+            ).addTo(map_80f9f671580f0d5e49d275dda8e32413);
+        
+    
+            var icon_0fdf057043e7f9b09bb3bfa74af1060f = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_e7c951e8cfff1a3ff415d080b84d49df.setIcon(icon_0fdf057043e7f9b09bb3bfa74af1060f);
+        
+    
+        var popup_379d8891d77548ca20ae17d836f71f5c = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_d3687e7fe4ced141c89b2fd1fcdfd172 = $(`<div id="html_d3687e7fe4ced141c89b2fd1fcdfd172" style="width: 100.0%; height: 100.0%;">Pays prédit par le Modèle: Switzerland</div>`)[0];
+                popup_379d8891d77548ca20ae17d836f71f5c.setContent(html_d3687e7fe4ced141c89b2fd1fcdfd172);
+            
+        
+
+        marker_e7c951e8cfff1a3ff415d080b84d49df.bindPopup(popup_379d8891d77548ca20ae17d836f71f5c)
+        ;
+
+        
+    
+    
+            var marker_7ca9055effc55b0f5ea84db73d0db24c = L.marker(
+                [1.4856156, -65.94923],
+                {}
+            ).addTo(map_80f9f671580f0d5e49d275dda8e32413);
+        
+    
+            var icon_d59b75d840b346c47f6b50e4241d7198 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_7ca9055effc55b0f5ea84db73d0db24c.setIcon(icon_d59b75d840b346c47f6b50e4241d7198);
+        
+    
+        var popup_4fdd9a7dcf6d6347119eb53c4caf6a10 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_3b8e4edf6f53cd9b14badf4644e204d6 = $(`<div id="html_3b8e4edf6f53cd9b14badf4644e204d6" style="width: 100.0%; height: 100.0%;">Pays prédit par le Modèle: Venezuela</div>`)[0];
+                popup_4fdd9a7dcf6d6347119eb53c4caf6a10.setContent(html_3b8e4edf6f53cd9b14badf4644e204d6);
+            
+        
+
+        marker_7ca9055effc55b0f5ea84db73d0db24c.bindPopup(popup_4fdd9a7dcf6d6347119eb53c4caf6a10)
+        ;
+
+        
+    
+    
+            var marker_48aea416e802ec81854db78209dcca14 = L.marker(
+                [46.36458, 17.632914],
+                {}
+            ).addTo(map_80f9f671580f0d5e49d275dda8e32413);
+        
+    
+            var icon_d9703c108495d22c8b2a3bd0b40895da = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_48aea416e802ec81854db78209dcca14.setIcon(icon_d9703c108495d22c8b2a3bd0b40895da);
+        
+    
+        var popup_7c9044113b2dd0da86606c41f896af6c = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_75bd7da0396d29cc8d981f0a0eb6c4e1 = $(`<div id="html_75bd7da0396d29cc8d981f0a0eb6c4e1" style="width: 100.0%; height: 100.0%;">Pays prédit par le Modèle: Hungary</div>`)[0];
+                popup_7c9044113b2dd0da86606c41f896af6c.setContent(html_75bd7da0396d29cc8d981f0a0eb6c4e1);
+            
+        
+
+        marker_48aea416e802ec81854db78209dcca14.bindPopup(popup_7c9044113b2dd0da86606c41f896af6c)
+        ;
+
+        
+    
+    
+            var marker_f7b25c4e594bda19b6a9f33b373b13cf = L.marker(
+                [26.656593, -35.931164],
+                {}
+            ).addTo(map_80f9f671580f0d5e49d275dda8e32413);
+        
+    
+            var icon_57d538c8f60802a385207000a2edd3ca = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_f7b25c4e594bda19b6a9f33b373b13cf.setIcon(icon_57d538c8f60802a385207000a2edd3ca);
+        
+    
+        var popup_33d20ce92b241dddb79a3c8204f4660b = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_d127997fda0ddc068d857328111f0c29 = $(`<div id="html_d127997fda0ddc068d857328111f0c29" style="width: 100.0%; height: 100.0%;">Pays prédit par le Modèle: Ocean</div>`)[0];
+                popup_33d20ce92b241dddb79a3c8204f4660b.setContent(html_d127997fda0ddc068d857328111f0c29);
+            
+        
+
+        marker_f7b25c4e594bda19b6a9f33b373b13cf.bindPopup(popup_33d20ce92b241dddb79a3c8204f4660b)
+        ;
+
+        
+    
+    
+            var marker_8b66bb2ce40226c0ad2f5b25589502cb = L.marker(
+                [48.25285, 31.2253],
+                {}
+            ).addTo(map_80f9f671580f0d5e49d275dda8e32413);
+        
+    
+            var icon_56212068097d2042e942f0370fb43851 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_8b66bb2ce40226c0ad2f5b25589502cb.setIcon(icon_56212068097d2042e942f0370fb43851);
+        
+    
+        var popup_d655b501bd5e011d11ec9d9781e1dd3b = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_e92cdb7f86f5bb6968b8f096aa22575c = $(`<div id="html_e92cdb7f86f5bb6968b8f096aa22575c" style="width: 100.0%; height: 100.0%;">Pays prédit par le Modèle: Ukraine</div>`)[0];
+                popup_d655b501bd5e011d11ec9d9781e1dd3b.setContent(html_e92cdb7f86f5bb6968b8f096aa22575c);
+            
+        
+
+        marker_8b66bb2ce40226c0ad2f5b25589502cb.bindPopup(popup_d655b501bd5e011d11ec9d9781e1dd3b)
+        ;
+
+        
+    
+    
+            var marker_ae1101b2457ca3618b7635759b6b47f5 = L.marker(
+                [47.03345, 6.899443],
+                {}
+            ).addTo(map_80f9f671580f0d5e49d275dda8e32413);
+        
+    
+            var icon_52d7a89c11c73b6d42aa73e420ab42fc = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_ae1101b2457ca3618b7635759b6b47f5.setIcon(icon_52d7a89c11c73b6d42aa73e420ab42fc);
+        
+    
+        var popup_81ad707ebe3db9699f7d20955c96de41 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_323b39d6a22b8c8029a4444cb12c9c10 = $(`<div id="html_323b39d6a22b8c8029a4444cb12c9c10" style="width: 100.0%; height: 100.0%;">Pays prédit par le Modèle: Switzerland</div>`)[0];
+                popup_81ad707ebe3db9699f7d20955c96de41.setContent(html_323b39d6a22b8c8029a4444cb12c9c10);
+            
+        
+
+        marker_ae1101b2457ca3618b7635759b6b47f5.bindPopup(popup_81ad707ebe3db9699f7d20955c96de41)
+        ;
+
+        
+    
+</script>
+</html>

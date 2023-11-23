@@ -1,6 +1,6 @@
 from flask import Flask, render_template, jsonify, request
 from flask_caching import Cache
-from fonctions import model_predict
+from fonctions import model_predict_DenseNet121
 from PIL import Image
 from keras.preprocessing.image import img_to_array
 from keras.applications.resnet import preprocess_input
@@ -36,7 +36,7 @@ def predict1():
     image_array = img_to_array(image) / 255.0
     image_array = np.expand_dims(image_array, axis=0)
     cache.set('image_array', image_array, timeout=300)
-    result = model_predict(image_array)
+    result = model_predict_DenseNet121(image_array)
     result = tuple(float(value) for value in result)
     return jsonify(result=result)
 
@@ -44,9 +44,13 @@ def predict1():
 def exploration():
     return render_template("exploration.html")
 
-@app.route('/stats')
-def stats():
-    return render_template("stats.html")
+@app.route('/stats_densetnet121')
+def stats_densetnet121():
+    return render_template("stats_densetnet121.html")
+
+@app.route('/stats_resnet50')
+def stats_resnet50():
+    return render_template("stats_resnet50.html")
 
 @app.route('/help')
 def help():

@@ -1,5 +1,8 @@
 test/
 modele/
+images/
+images_region/
+region_learning/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

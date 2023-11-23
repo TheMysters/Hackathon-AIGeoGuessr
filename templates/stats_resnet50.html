@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+
+{% block title %}Statistiques sur le modèle ResNet50{% endblock %}
+
+{% block css %}
+<style>
+    .content-container {
+        margin: 0 auto;
+        max-width: 90%;
+        padding: 0 20px;
+    }
+    .image-container, .image-container2 {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    .image-title, .country-map-iframe-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .image-description {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 15px;
+    }
+
+    .country-map-iframe {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="content-container">
+    <!-- Evaluation du modèle -->
+    <div class="image-container">
+        <h3 class="image-title">Comparaison des distances entre les prédictions du modèle et d'une approche aléatoire</h3>
+        <img src="{{ url_for('static', filename='VisualisationDeDonnee/Entree/ResNet50/evaluation_test_resnet50.png') }}" alt="Evaluation du modèle">
+        <p class="image-description">L'histogramme ci-dessus présente les distances calculées entre les coordonnées d'origine et les prédictions du modèle, ainsi que les distances générées de manière aléatoire. Les barres représentent la distribution des distances dans chaque cas, et les lignes verticales indiquent les moyennes respectives. Cette comparaison permet d'évaluer l'efficacité du modèle par rapport à une approche aléatoire.</p>
+    </div>    
+    <!-- Evaluation du modèle par pays -->
+    <div class="country-selector-container">
+        <h3 class="image-title">Comparaison des distances entre les prédictions du modèle et d'une approche aléatoire, par pays</h3>
+        <p class="image-description">Cette représentation cartographique met en évidence les variations des distances entre les coordonnées d'origine des images, les prédictions du modèle, et les distances calculées, spécifiquement par pays. Choisir un pays dans la liste déroulante ci-dessous permet d'explorer les différences de distances dans chaque pays et d'obtenir le score moyen du modèle.</p>
+        <label for="country-select">Choisissez un pays :</label>
+        <select id="country-select" onchange="updateCountryMap()"></select>
+    </div>
+
+    <div class="image-container">
+        <img id="country-map" src="" alt="Carte du pays sélectionné" style="max-width:100%; height:auto;">
+    </div>
+
+    <!-- Points du dataset vs points prédits par le modèle -->
+    <div class="country-selector-container2">
+        <h3 class="image-title2">Comparaison des distances entre les prédictions du modèle et d'une approche aléatoire, par pays</h3>
+        <p class="image-description2">Cette représentation cartographique met en évidence les variations des distances entre les coordonnées d'origine des images, les prédictions du modèle, et les distances calculées, spécifiquement par pays. Choisir un pays dans la liste déroulante ci-dessous permet d'explorer les différences de distances dans chaque pays et d'obtenir le score moyen du modèle.</p>
+        <label for="country-select2">Choisissez un pays :</label>
+        <select id="country-select2" onchange="updateCountryMap2()"></select>
+    </div>
+    
+    <h3 class="country-map-iframe-title">Position des points du dataset (en bleu) vs prédiction de la position des points par le modèle (en rouge) par pays</h3>
+    <div class="image-container2">
+        <iframe id="country-map-iframe" src="" width="85%" height="1000px" frameborder="20"></iframe>
+    </div>
+
+</div>
+
+<script>
+    function updateCountryMap() {
+        var selectedCountry = document.getElementById('country-select').value;
+        var imagePath = "/static/VisualisationDeDonnee/Entree/ResNet50/comparaisonModelRandom/comparaisonModelRandom;" + selectedCountry + ".png";
+        document.getElementById('country-map').src = imagePath;
+    }
+
+    // Fonction pour initialiser les options du menu déroulant
+    function initializeCountryOptions(countries) {
+        var selectElement = document.getElementById('country-select');
+        countries.forEach(function(country, index) {
+            var option = document.createElement('option');
+            option.value = country;
+            option.text = country;
+            selectElement.appendChild(option);
+
+            // Définir la valeur par défaut (par exemple, le premier pays dans la liste)
+            if (index === countries.length - 1) {
+                selectElement.value = country;
+            }
+        });
+    }
+
+    // Exemple de liste de pays
+    initializeCountryOptions(['Argentina', 'Australia', 'Brazil', 'Canada', 'Chile', 'Colombia', 'Finland', 'France', 'Germany', 'India', 'Indonesia', 'Italy', 'Japan', 'Mexico', 'Netherlands', 'Norway', 'Philippines', 'Poland', 'Romania', 'Russia', 'South Africa', 'Spain', 'Sweden', 'Thailand', 'Turkey', 'United Kingdom', 'United States']);
+
+    // Charger l'image par défaut
+    updateCountryMap();
+
+    function updateCountryMap2() {
+        var selectedCountry = document.getElementById('country-select2').value;
+        var iframeElement = document.getElementById('country-map-iframe');
+        iframeElement.src = "/static/VisualisationDeDonnee/Entree/ResNet50/PredictionPointOriMod/predictionPointOriMod;" + selectedCountry + ".html";
+    }
+
+    // Fonction pour initialiser les options le deuxième menu déroulant
+    function initializeCountryOptions2(countries) {
+        var selectElement = document.getElementById('country-select2');
+        countries.forEach(function(country, index) {
+            var option = document.createElement('option');
+            option.value = country;
+            option.text = country;
+            selectElement.appendChild(option);
+
+            if (index === countries.length - 1) {
+                selectElement.value = country;
+            }
+        });
+    }
+
+    initializeCountryOptions2(['Argentina', 'Australia', 'Brazil', 'Canada', 'Chile', 'Colombia', 'Finland', 'France', 'Germany', 'India', 'Indonesia', 'Italy', 'Japan', 'Mexico', 'Netherlands', 'Norway', 'Philippines', 'Poland', 'Romania', 'Russia', 'South Africa', 'Spain', 'Sweden', 'Thailand', 'Turkey', 'United Kingdom', 'United States'])
+    updateCountryMap2();
+
+</script>
+{% endblock %}

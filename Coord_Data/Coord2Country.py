@@ -7,19 +7,18 @@ import os
 def data2country():
     print("Loading data...")
     # Charger les données géographiques des pays
-    countries = gpd.read_file('Country_Boundaries/ne_10m_admin_0_countries.shp')
-    df = pd.read_csv('coordonnees.csv')
-    gdf = gpd.GeoDataFrame(df, geometry=gpd.points_from_xy(df.Longitude, df.Latitude))
-
-
+    countries = gpd.read_file('Coord_Data/Country_Boundaries/ne_10m_admin_0_countries.shp')
+    df = pd.read_csv('historique_densenet121.csv')
+    gdf = gpd.GeoDataFrame(df, geometry=gpd.points_from_xy(df.LatitudeOrigine, df.LongitudeOrigine))
     gdf.set_crs(countries.crs, inplace=True)
-
     #Jointure spatiale
     print("Jointure spatiale...")
     result = gpd.sjoin(gdf, countries, how="left", op='intersects')
-    df['Pays'] = result['NAME'] 
+    df['PaysOrigine'] = result['NAME'] 
 
     df.to_csv('coordonnees_resultat.csv', index=False,encoding='utf-8')
+
+data2country()
 
 def data2nearestcity():
     print("import data...")
