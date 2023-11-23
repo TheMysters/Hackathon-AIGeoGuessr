@@ -34,7 +34,7 @@ def haversine_loss(y_true, y_pred):
 
 def load_model():
     with tf.keras.utils.custom_object_scope({'haversine_loss': haversine_loss}):
-        loaded_model = tf.keras.models.load_model("modele/DenseNet_omg/model_checkpoint_DenseNetV2.h5")
+        loaded_model = tf.keras.models.load_model("modele/DenseNet_omg/model_checkpoint_DenseNet121_epoch_18.h5")
         return loaded_model
 
 def evaluate_model(folder_path):

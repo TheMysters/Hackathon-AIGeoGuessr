@@ -20,12 +20,148 @@
         overflow: hidden;  /* Hide overflow content */
         margin-left: auto;
         margin-right: auto;
+        margin-top: 10px;
     }
     p {
         font-size: 24px;
         font-weight: normal;
         text-align: center;
     }
+    #fileInput {
+    display: none;
+    }
+    #marker-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .button {
+    --width: 100px;
+    --height: 35px;
+    --tooltip-height: 35px;
+    --tooltip-width: 90px;
+    --gap-between-tooltip-to-button: 18px;
+    --button-color: #ef3806;
+    --tooltip-color: #fff;
+    width: var(--width);
+    height: var(--height);
+    background: var(--button-color);
+    position: relative;
+    text-align: center;
+    border-radius: 0.45em;
+    font-family: "Arial";
+    transition: background 0.3s;
+    }
+
+    .button::before {
+    position: absolute;
+    content: attr(data-tooltip);
+    width: var(--tooltip-width);
+    height: var(--tooltip-height);
+    background-color: var(--tooltip-color);
+    font-size: 0.9rem;
+    color: #111;
+    border-radius: .25em;
+    line-height: var(--tooltip-height);
+    bottom: calc(var(--height) + var(--gap-between-tooltip-to-button) + 10px);
+    left: calc(50% - var(--tooltip-width) / 2);
+    }
+
+    .button::after {
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-top-color: var(--tooltip-color);
+    left: calc(50% - 10px);
+    bottom: calc(100% + var(--gap-between-tooltip-to-button) - 10px);
+    }
+
+    .button::after,.button::before {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s;
+    }
+
+    .text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+
+    .button-wrapper,.text,.icon {
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    color: #fff;
+    }
+
+    .text {
+    top: 0
+    }
+
+    .text,.icon {
+    transition: top 0.5s;
+    }
+
+    .icon {
+    color: #fff;
+    top: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+
+    .icon svg {
+    width: 24px;
+    height: 24px;
+    }
+
+    .button:hover {
+    background: #fb7b10;
+    }
+
+    .button:hover .text {
+    top: -100%;
+    }
+
+    .button:hover .icon {
+    top: 0;
+    }
+
+    .button:hover:before,.button:hover:after {
+    opacity: 1;
+    visibility: visible;
+    }
+
+    .button:hover:after {
+    bottom: calc(var(--height) + var(--gap-between-tooltip-to-button) - 20px);
+    }
+
+    .button:hover:before {
+    bottom: calc(var(--height) + var(--gap-between-tooltip-to-button));
+    }
+
+    .button2 {
+    color: #ecf0f1;
+    font-size: 17px;
+    background-color: #ef3806;
+    border: 1px solid #fb7b10;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0px 6px 0px #de3607;
+    transition: all .1s;
+    }
+
+    .button2:active {
+    box-shadow: 0px 2px 0px #e16f12;
+    position: relative;
+    top: 2px;
+    }
+
 </style>
 {% endblock %}
 
@@ -35,8 +171,18 @@
     <p>Utilisez uniquement des images au format JPG</p>
 
     <form id="marker-container" enctype="multipart/form-data" action="/predict1" method="POST">
-        <input type="file" name="image" accept=".png, .jpeg, .jpg" id="fileInput" onchange="enablePredictButton()" />
-        <button type="button" id="predictButton" onclick="predict()">Prédire</button>
+        <input type="file" name="image" accept=".jpeg, .jpg" id="fileInput" onchange="predict()" />
+
+        <div class="button" data-tooltip="Size: 20Mb" onclick="document.getElementById('fileInput').click();">
+            <div class="button-wrapper">
+            <div class="text">Upload JPG</div>
+            <span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 0 0 4.561 21h14.878a2 2 0 0 0 1.94-1.515L22 17"></path>
+                </svg>
+            </span>
+            </div>
+        </div>
     </form>
     
     <div id="map-container">
@@ -67,17 +213,8 @@
         var marker = L.marker([0, 0], markerOptions).addTo(map);
         
         marker.setOpacity(0);
-
-        function enablePredictButton() {
-            var fileInput = document.getElementById('fileInput');
-            var predictButton = document.getElementById('predictButton');
-
-            // Enable the "Prédire" button if a file is selected
-            predictButton.disabled = !fileInput.files || fileInput.files.length === 0;
-        }
         var marker2;
         var line;
-        enablePredictButton()
 
         function predict() {
             if (line && map.hasLayer(line)) {
@@ -112,8 +249,6 @@
                 marker2.setOpacity(0);
             }
 
-            var predictButton = document.getElementById('predictButton');
-            predictButton.disabled = true;
             if (map.hasLayer(marker)) {
                 // If a marker exists, remove it from the map
                 map.removeLayer(marker);
