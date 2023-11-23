@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Statistiques sur le modèle DenseNet121{% endblock %}
+{% block title %}Statistiques sur le modèle avec une approche par région{% endblock %}
 
 {% block css %}
 <style>
@@ -39,8 +39,20 @@
 <div class="content-container">
     <!-- Evaluation du modèle -->
     <div class="image-container">
-        <h3 class="image-title">Comparaison des distances entre les prédictions du modèle DenseNet121 et un modèle aléatoire</h3>
-        <img src="{{ url_for('static', filename='VisualisationDeDonnee/Entree/DenseNet121/evaluation_test_densenet121.png') }}" alt="Evaluation du modèle">
+        <h3 class="image-title">Matrice de confusion du modèle de classification par région du monde</h3>
+        <img src="{{ url_for('static', filename='VisualisationDeDonnee/Entree/ModeleRegion/matrice_de_confusion_classifier.png') }}" alt="Evaluation du modèle">
+        <p class="image-description">Les régions du monde sont décomposées de la manière suivante : 'Europe West' englobe les pays tels que la France, l'Espagne, l'Italie, la Turquie, l'Allemagne, la Pologne, le Royaume-Uni et les Pays-Bas. 'Europe East' regroupe des pays tels que la Suède, la Norvège, la Finlande, la Roumanie et la Russie. 'North America' comprend les États-Unis, le Canada et le Mexique. 'South America' inclut le Brésil, le Chili, l'Argentine et la Colombie. 'South Africa' se limite à l'Afrique du Sud. 'India' représente l'Inde. 'Japan' se réfère au Japon. Enfin, 'South Asia' regroupe l'Indonésie, les Philippines et la Thaïlande.<br>Cette matrice offre une synthèse détaillée des performances de classification, évaluant la précision du modèle spécifiquement dans la segmentation des différentes régions géographiques.</p>
+    </div>   
+    <!-- Evaluation du modèle -->
+    <div class="image-container">
+        <h3 class="image-title">Matrice de confusion du modèle contenant le classifier ainsi que les modèles de regression par région</h3>
+        <img src="{{ url_for('static', filename='VisualisationDeDonnee/Entree/ModeleRegion/matrice_de_confusion_pipeline.png') }}" alt="Evaluation du modèle">
+        <p class="image-description">Cette matrice permet d'évaluer de manière détaillée la précision de prédictions, en distinguant les réussites et les échecs du modèle tant dans la classification des classes que dans la prédiction des valeurs de régression, avec une attention particulière portée à la variabilité régionale (Ocean).</p>
+    </div>    
+    <!-- Evaluation du modèle -->
+    <div class="image-container">
+        <h3 class="image-title">Comparaison des distances entre les prédictions du modèle avec approche régionale et un modèle aléatoire</h3>
+        <img src="{{ url_for('static', filename='VisualisationDeDonnee/Entree/ModeleRegion/evaluation_test_modele_region.png') }}" alt="Evaluation du modèle">
         <p class="image-description">L'histogramme ci-dessus présente les distances calculées entre les coordonnées d'origine et les prédictions du modèle, ainsi que les distances générées de manière aléatoire. Les barres représentent la distribution des distances dans chaque cas, et les lignes verticales indiquent les moyennes respectives. Cette comparaison permet d'évaluer l'efficacité du modèle par rapport à une approche aléatoire.</p>
     </div>    
     <!-- Evaluation du modèle par pays -->
@@ -73,7 +85,7 @@
 <script>
     function updateCountryMap() {
         var selectedCountry = document.getElementById('country-select').value;
-        var imagePath = "/static/VisualisationDeDonnee/Entree/DenseNet121/comparaisonModelRandom/comparaisonModelRandom;" + selectedCountry + ".png";
+        var imagePath = "/static/VisualisationDeDonnee/Entree/ModeleRegion/comparaisonModelRandom/comparaisonModelRandom;" + selectedCountry + ".png";
         document.getElementById('country-map').src = imagePath;
     }
 
@@ -94,7 +106,7 @@
     }
 
     // Exemple de liste de pays
-    initializeCountryOptions(['Argentina', 'Australia', 'Brazil', 'Canada', 'Chile', 'Colombia', 'Finland', 'France', 'Germany', 'India', 'Indonesia', 'Italy', 'Japan', 'Mexico', 'Netherlands', 'Norway', 'Philippines', 'Poland', 'Romania', 'Russia', 'South Africa', 'Spain', 'Sweden', 'Thailand', 'Turkey', 'United Kingdom', 'United States']);
+    initializeCountryOptions(['Argentina', 'Brazil', 'Canada', 'Chile', 'Colombia', 'Finland', 'France', 'Germany', 'India', 'Indonesia', 'Italy', 'Japan', 'Mexico', 'Netherlands', 'Norway', 'Philippines', 'Poland', 'Romania', 'Russia', 'South Africa', 'Spain', 'Sweden', 'Thailand', 'Turkey', 'United Kingdom', 'United States']);
 
     // Charger l'image par défaut
     updateCountryMap();
@@ -102,7 +114,7 @@
     function updateCountryMap2() {
         var selectedCountry = document.getElementById('country-select2').value;
         var iframeElement = document.getElementById('country-map-iframe');
-        iframeElement.src = "/static/VisualisationDeDonnee/Entree/DenseNet121/PredictionPointOriMod/predictionPointOriMod;" + selectedCountry + ".html";
+        iframeElement.src = "/static/VisualisationDeDonnee/Entree/ModeleRegion/PredictionPointOriMod/predictionPointOriMod;" + selectedCountry + ".html";
     }
 
     // Fonction pour initialiser les options le deuxième menu déroulant
@@ -120,7 +132,7 @@
         });
     }
 
-    initializeCountryOptions2(['Argentina', 'Australia', 'Brazil', 'Canada', 'Chile', 'Colombia', 'Finland', 'France', 'Germany', 'India', 'Indonesia', 'Italy', 'Japan', 'Mexico', 'Netherlands', 'Norway', 'Philippines', 'Poland', 'Romania', 'Russia', 'South Africa', 'Spain', 'Sweden', 'Thailand', 'Turkey', 'United Kingdom', 'United States'])
+    initializeCountryOptions2(['Argentina', 'Brazil', 'Canada', 'Chile', 'Colombia', 'Finland', 'France', 'Germany', 'India', 'Indonesia', 'Italy', 'Japan', 'Mexico', 'Netherlands', 'Norway', 'Philippines', 'Poland', 'Romania', 'Russia', 'South Africa', 'Spain', 'Sweden', 'Thailand', 'Turkey', 'United Kingdom', 'United States'])
     updateCountryMap2();
 
 </script>

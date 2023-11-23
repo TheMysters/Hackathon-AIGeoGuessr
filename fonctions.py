@@ -78,7 +78,7 @@ def evaluate_model_resNet50(folder_path):
                     csv_writer.writerow([latitude_origin, longitude_origin, latitude_model, longitude_model, distance_model_km, latitude_random, longitude_random, distance_random_km])
 
 def visualize_evaluation():
-    df = pd.read_csv('historique_resnet50.csv')
+    df = pd.read_csv('model_regional.csv')
     bin_width = 500
     bins = np.arange(0, df['DistanceModel'].max() + bin_width, bin_width)
 
@@ -88,12 +88,12 @@ def visualize_evaluation():
     mean_model = df['DistanceModel'].mean()
     mean_random = df['DistanceRandom'].mean()
 
-    plt.axvline(x=mean_model, color='red', linestyle='dashed', linewidth=2, label=f'Moyenne du modèle ResNet50: {mean_model:.2f}')
+    plt.axvline(x=mean_model, color='red', linestyle='dashed', linewidth=2, label=f'Moyenne du modèle avec une approche régionale: {mean_model:.2f}')
     plt.axvline(x=mean_random, color='green', linestyle='dashed', linewidth=2, label=f'Moyenne aléatoire: {mean_random:.2f}')
 
     plt.xlabel('Distance (km)')
     plt.ylabel('Nombre d\'echantillon')
-    plt.title('Histogramme du modèle ResNet50 et d\'un modèle random')   
+    plt.title('Histogramme du modèle avec une approche régionale et d\'un modèle random')   
 
     plt.legend()
     plt.show()
@@ -129,10 +129,10 @@ def add_country_from_coordinates_model(csv_file): #Utiliser Coord2Country.py de 
         df.at[index, 'PaysModel'] = country
         print(country)
 
-    df.to_csv('tt.csv', index=False)
+    df.to_csv('ttt.csv', index=False)
 
 def visualize_evaluation_country(pays_name:str):
-    df = pd.read_csv('historique_resnet50.csv')
+    df = pd.read_csv('model_regional.csv')
     df_us = df[df['PaysOrigine'] == pays_name]
     if df_us.empty:
         print(f"Aucune donnée disponible pour les {pays_name}.")
@@ -203,4 +203,4 @@ def generate_map(csv_filename, country_name):
     m.save("map.html")
 
 #visualize_evaluation_country('United States')
-#generate_map('historique_resnet50.csv', 'United States')
+#generate_map('model_regional.csv', 'United States')

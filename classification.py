@@ -50,20 +50,31 @@ def split_folder(folder_path: str):
 
 #split_folder('images_region/')
 
-def add_region():
-    df = pd.read_csv('coord_pays_28_pays.csv')
+def add_region(csv_path):
+    df = pd.read_csv(csv_path)
 
     regions = {
         'Europe West': ['France', 'Spain', 'Italy', 'Turkey', 'Germany', 'Poland', 'United Kingdom', 'Netherlands'],
         'Europe East': ['Sweden', 'Norway', 'Finland', 'Romania', 'Russia'],
-        'North America': ['United States of America', 'Canada', 'Mexico'],
+        'North America': ['United States', 'Canada', 'Mexico'],
         'South America': ['Brazil', 'Chile', 'Argentina', 'Colombia'],
         'South Africa': ['South Africa'],
         'India': ['India'],
         'Japan': ['Japan'],
         'South Asia': ['Indonesia', 'Philippines', 'Thailand']
     }
-    pass
+    def get_region(country):
+        for region, countries in regions.items():
+            if country in countries:
+                return region
+        return 'Ocean'
+ 
+    # Ajout des colonnes RegionOrigine et RegionModel
+    df['RegionOrigine'] = df['PaysOrigine'].apply(get_region)
+    df['RegionModel'] = df['PaysModel'].apply(get_region)
+
+    # Sauvegarde du DataFrame modifié dans un nouveau fichier CSV
+    df.to_csv('nouveau_fichier.csv', index=False)
 
 import shutil
 from sklearn.model_selection import train_test_split
@@ -101,4 +112,3 @@ def logique(region: str):
         dest_path = os.path.join('images_region', 'validation', region ,image_filename)
         shutil.copy(source_path, dest_path)
 
-logique("South Asia")

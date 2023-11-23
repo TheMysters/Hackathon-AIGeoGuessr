@@ -52,6 +52,10 @@ def stats_densetnet121():
 def stats_resnet50():
     return render_template("stats_resnet50.html")
 
+@app.route('/stats_regional')
+def stats_regional():
+    return render_template("stats_regional.html")
+
 @app.route('/help')
 def help():
     return render_template("help.html")

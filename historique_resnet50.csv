@@ -1,4 +1,4 @@
-LatitudeOrigine,LongitudeOrigine,LatitudeModel,LongitudeModel,DistanceModel,LatitudeRandom,LongitudeRandom,DistanceRandom,PaysOrigine,PaysModel
+LatitudeOrigine,LongitudeOrigine,LatitudeModel,LongitudeModel,DistanceModel,LatitudeRandom,LongitudeRandom,DistanceRandom,PaysOrigine,PaysModel,RegionOrigine,RegionModel
 -0.2768407,110.1047823,31.126322,-86.52937,16170.904485555136,73.37120819329004,-77.27954577518736,11873.555926138955,Indonesia,United States
 -0.9589046,-62.937968,30.214317,25.924606,9958.25003755747,18.50402156713808,-70.74241290667231,2316.093681324848,Brazil,Egypt
 -1.1322125,-46.6191948,10.098165,-39.75505,1456.2865821248624,-10.196579796045128,-104.45534789010875,6475.199783312754,Brazil,Ocean

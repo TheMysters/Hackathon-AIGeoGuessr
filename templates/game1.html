@@ -216,60 +216,67 @@
         var line;
 
         function predict() {
-            if (line && map.hasLayer(line)) {
-                    // If a line exists, remove it from the map
-                    map.removeLayer(line);
-                }
-            var file = fileInput.files[0];
-            var fileName = file.name;
+            var fileInput = document.getElementById('fileInput');
+            if (fileInput.files.length > 0) {
+                var fileSize = fileInput.files[0].size; // taille du fichier en octets
+                var maxSize = 20 * 1024 * 1024; // 20 Mo en octets
 
-            var match = fileName.match(/([-+]?\d*\.\d+|\d+)/g);
-            if (match && match.length >= 2) {
-                var lat = parseFloat(match[0]);
-                var lng = parseFloat(match[1]);
+                if (fileSize <= maxSize) {
+                    if (line && map.hasLayer(line)) {
+                            // If a line exists, remove it from the map
+                            map.removeLayer(line);
+                        }
+                    var file = fileInput.files[0];
+                    var fileName = file.name;
 
-                // Check if marker2 exists, remove it if it does
-                if (marker2) {
-                    map.removeLayer(marker2);
-                }
+                    var match = fileName.match(/([-+]?\d*\.\d+|\d+)/g);
+                    if (match && match.length >= 2) {
+                        var lat = parseFloat(match[0]);
+                        var lng = parseFloat(match[1]);
 
-                // Create a new marker2
-                marker2 = L.marker([lat, lng], {
-                    draggable: false
-                }).addTo(map);
-            } 
-            else {
-                if (marker2) {
-                    map.removeLayer(marker2);
+                        // Check if marker2 exists, remove it if it does
+                        if (marker2) {
+                            map.removeLayer(marker2);
+                        }
+
+                        // Create a new marker2
+                        marker2 = L.marker([lat, lng], {
+                            draggable: false
+                        }).addTo(map);
+                    } 
+                    else {
+                        if (marker2) {
+                            map.removeLayer(marker2);
+                        }
+                        marker2 = L.marker([0, 0], {
+                            draggable: false
+                        }).addTo(map);
+                        marker2.setOpacity(0);
+                    }
+
+                    if (map.hasLayer(marker)) {
+                        // If a marker exists, remove it from the map
+                        map.removeLayer(marker);
+                    }
+                    // Create a FormData object to send the file
+                    var formData = new FormData(document.getElementById('marker-container'));
+
+                    fetch('/predict1', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        var lat = data.result[0];
+                        var lng = data.result[1];
+
+                        marker = L.marker([lat, lng], markerOptions).addTo(map);
+                        marker.setOpacity(1);
+                        getDistance();
+                    })
+                    .catch(error => console.error('Error:', error));
                 }
-                marker2 = L.marker([0, 0], {
-                    draggable: false
-                }).addTo(map);
-                marker2.setOpacity(0);
             }
-
-            if (map.hasLayer(marker)) {
-                // If a marker exists, remove it from the map
-                map.removeLayer(marker);
-            }
-            // Create a FormData object to send the file
-            var formData = new FormData(document.getElementById('marker-container'));
-
-            fetch('/predict1', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data.result);
-                var lat = data.result[0];
-                var lng = data.result[1];
-
-                marker = L.marker([lat, lng], markerOptions).addTo(map);
-                marker.setOpacity(1);
-                getDistance();
-            })
-            .catch(error => console.error('Error:', error));
         }
         function getDistance(){
             if (map.hasLayer(marker) && map.hasLayer(marker2)) {
@@ -287,8 +294,6 @@
                     // Calculer la distance entre les deux points en kilomètres
                     var distanceInKm = latlng1.distanceTo(latlng2) / 1000;
                     line.bindTooltip('Distance : ' + distanceInKm.toFixed(2) + ' km').openTooltip();
-                    // Afficher la distance dans la console
-                    console.log('Distance entre les deux points : ' + distanceInKm + ' km');
                 }
             }
         }

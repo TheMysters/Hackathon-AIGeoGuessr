@@ -15,18 +15,14 @@
     <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" class="header-logo">
     
     <a href="/">Accueil</a>
-    <div class="dropdown">
-        <a>Jeu</a>
-        <div class="dropdown-content">
-            <a href="/game1">Une image</a>
-        </div>
-    </div>
+    <a href="/game1">Jouer</a>
     <a href="/exploration">Exploration du jeu de données</a>
     <div class="dropdown">
         <a>Statistiques</a>
         <div class="dropdown-content">
             <a href="/stats_densetnet121">Modèle mondial DenseNet121</a>
-            <a href="/stats_resnet50">Modèle mondial ResNetV50</a>
+            <a href="/stats_resnet50">Modèle mondial ResNet50</a>
+            <a href="/stats_regional">Modèle avec une approche par région</a>
         </div>
     </div>
     <a href="/help">Aide & Ressources</a>
