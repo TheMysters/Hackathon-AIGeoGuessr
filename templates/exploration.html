@@ -23,9 +23,14 @@
     }
 
     .image-description {
+        background-color: rgba(255, 255, 255, 0.7); 
+        border: 1px solid #ccc; 
+        padding: 10px;
+        border-radius: 8px;
         font-size: 14px;
-        color: #666;
+        color: #393939;
         margin-bottom: 15px;
+        text-align: center; 
     }
 
     .heatmap-frame, .markermap-frame {
@@ -62,7 +67,7 @@
         <!-- Cloroplethe -->
         <div class="country-selector-container">
             <h3 class="image-title">Carte chloroplethe par pays</h3>
-            <p>Une carte choroplèthe est une représentation cartographique où les zones géographiques sont colorées ou ombrées en fonction du nombre d'images obtenu dans le jeu de données. Les couleurs sur la carte indiquent les variations du nombre d'images dans chaque zone, offrant ainsi une visualisation précise des différences régionales. Les tons plus foncés ou plus intenses représentent un nombre d'images plus élevé, tandis que les tons plus clairs correspondent à un nombre d'images plus bas.</p>
+            <p class="image-description">Une carte choroplèthe est une représentation cartographique où les zones géographiques sont colorées ou ombrées en fonction du nombre d'images obtenu dans le jeu de données. Les couleurs sur la carte indiquent les variations du nombre d'images dans chaque zone, offrant ainsi une visualisation précise des différences régionales. Les tons plus foncés ou plus intenses représentent un nombre d'images plus élevé, tandis que les tons plus clairs correspondent à un nombre d'images plus bas.</p>
             <label for="country-select">Choisissez un pays :</label>
             <select id="country-select" onchange="updateCountryMap()">
                 <!-- Les options seront ajoutées ici via JavaScript -->

@@ -14,8 +14,8 @@
         flex-direction: column;
     }
     #map-container {
-        width: 90%;
-        height: 800px; 
+        width: 80%;
+        height: 70vh; 
         border: 2px solid black;  /* Set the desired border size and color */
         overflow: hidden;  /* Hide overflow content */
         margin-left: auto;
@@ -167,8 +167,7 @@
 
 {% block content %}
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-
-    <p>Utilisez uniquement des images au format JPG</p>
+    <h1 class="titre-moderne">WHERE AM I</h1>
 
     <form id="marker-container" enctype="multipart/form-data" action="/predict1" method="POST">
         <input type="file" name="image" accept=".jpeg, .jpg" id="fileInput" onchange="predict()" />
@@ -186,7 +185,7 @@
     </form>
     
     <div id="map-container">
-        <iframe id="map-iframe"></iframe>
+        <iframe id="map-iframe" ></iframe>
     </div>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
