@@ -1,5 +1,4 @@
 test/
-modele/
 images/
 images_region/
 region_learning/
@@ -166,6 +165,6 @@ cython_debug/
 
 shapefile/*
 testia/*
-modele/
+modele/ModeleRegio*
 test.py
 test-all/*
