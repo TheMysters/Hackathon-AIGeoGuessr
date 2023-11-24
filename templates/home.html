@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base_home.html' %}
 
 {% block title %}Accueil{% endblock %}
 
@@ -6,6 +6,8 @@
 <div class="section-titre">
     <h1 class="titre-moderne">WHERE AM I</h1>
     <button id="start-button" class="button2" onclick="startGame()">Démarrer le jeu</button>
+    <button id="start-button" class="button2" onclick="startExplo()">Explorer les données</button>
+    <button id="start-button" class="button2" onclick="startStat()">Statistiques</button>
 </div>
 <div class="bloc-presentation">
     <h1>Présentation du sujet</h1>
@@ -44,6 +46,12 @@
 <script>
     function startGame() {
         window.location.href = "/game1";
+    }
+    function startExplo() {
+        window.location.href = "/exploration";
+    }
+    function startStat() {
+        window.location.href = "/stats_densetnet121";
     }
 </script>
 {% endblock %}

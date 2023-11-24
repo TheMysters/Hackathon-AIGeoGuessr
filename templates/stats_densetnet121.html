@@ -13,17 +13,28 @@
         margin-bottom: 20px;
         text-align: center;
     }
-    .image-title, .country-map-iframe-title {
+    .image-title, .heatmap-title, .markermap-title {
         font-size: 18px;
+        font-weight: bold;
+        margin: 10px 0;
+        text-align: center;
+    }
+    .image-title2{
+        font-size: 14px;
         font-weight: bold;
         margin: 10px 0;
         text-align: center;
     }
 
     .image-description {
+        background-color: rgba(255, 255, 255, 0.7); 
+        border: 1px solid #ccc; 
+        padding: 10px;
+        border-radius: 8px;
         font-size: 14px;
-        color: #666;
+        color: #393939;
         margin-bottom: 15px;
+        text-align: center; 
     }
 
     .country-map-iframe {
@@ -56,15 +67,15 @@
     </div>
 
     <!-- Points du dataset vs points prédits par le modèle -->
-    <div class="country-selector-container2">
-        <h3 class="image-title2">Comparaison des distances entre les prédictions du modèle et d'une approche aléatoire, par pays</h3>
-        <p class="image-description2">Cette représentation cartographique met en évidence les variations des distances entre les coordonnées d'origine des images, les prédictions du modèle, et les distances calculées, spécifiquement par pays. Choisir un pays dans la liste déroulante ci-dessous permet d'explorer les différences de distances dans chaque pays et d'obtenir le score moyen du modèle.</p>
+    <div class="country-selector-container">
+        <h3 class="image-title">Comparaison des distances entre les prédictions du modèle et d'une approche aléatoire, par pays</h3>
+        <p class="image-description">Cette représentation cartographique met en évidence les variations des distances entre les coordonnées d'origine des images, les prédictions du modèle, et les distances calculées, spécifiquement par pays. Choisir un pays dans la liste déroulante ci-dessous permet d'explorer les différences de distances dans chaque pays et d'obtenir le score moyen du modèle.</p>
+        <h3 class="image-title2">Position des points du dataset (en bleu) vs prédiction de la position des points par le modèle (en rouge) par pays</h3>
         <label for="country-select2">Choisissez un pays :</label>
         <select id="country-select2" onchange="updateCountryMap2()"></select>
     </div>
     
-    <h3 class="country-map-iframe-title">Position des points du dataset (en bleu) vs prédiction de la position des points par le modèle (en rouge) par pays</h3>
-    <div class="image-container2">
+    <div class="image-container">
         <iframe id="country-map-iframe" src="" width="85%" height="1000px" frameborder="20"></iframe>
     </div>
 
