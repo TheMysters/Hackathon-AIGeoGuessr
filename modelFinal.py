@@ -7,7 +7,7 @@ import random, csv
 import os, re
 from geopy.distance import geodesic
 import itertools
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix, accuracy_score
 import matplotlib.pyplot as plt
 
 MODEL_DIR = "modele/ModeleRegion"
@@ -138,6 +138,8 @@ def add_region_classifier(csv_path, folder_path, models):
 def make_confusion_matrix(y_true, y_pred, classes=None, figsize=(10, 10), text_size=15):
     # Create the confustion matrix
     cm = confusion_matrix(y_true, y_pred)
+    accuracy = accuracy_score(y_true, y_pred)
+    print(f'Accuracy: {accuracy}')
     cm_norm = cm.astype("float") / cm.sum(axis=1)[:, np.newaxis] # normalize it
     n_classes = cm.shape[0] # find the number of classes we're dealing with
 
@@ -202,8 +204,6 @@ def make_confusion_matrix_classifier():
                         figsize=(10, 10),
                         text_size=8)
     
-make_confusion_matrix_classifier()
-    
 def read_prediction_pipeline_csv(csv_filename):
     y_true = []
     y_preds = []
@@ -217,7 +217,7 @@ def read_prediction_pipeline_csv(csv_filename):
     return y_true, y_preds
 
 def make_confusion_matrix_pipeline():
-    y_true, y_preds = read_prediction_pipeline_csv("model_regional.csv")
+    y_true, y_preds = read_prediction_pipeline_csv("historique_modelRegion.csv")
 
     class_names = ['Europe East', 'Europe West', 'India', 'Japan', 'North America', 'Ocean',
                 'South Africa', 'South America', 'South Asia']
@@ -227,3 +227,5 @@ def make_confusion_matrix_pipeline():
                         classes=class_names,
                         figsize=(10, 10),
                         text_size=8)
+
+make_confusion_matrix_pipeline()
