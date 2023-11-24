@@ -4,6 +4,7 @@
 
 {% block content %}
 <div class="section-titre">
+    <img class ="logo_main" src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo">
     <h1 class="titre-moderne">WHERE AM I</h1>
     <button id="start-button" class="button2" onclick="startGame()">Démarrer le jeu</button>
     <button id="start-button" class="button2" onclick="startExplo()">Explorer les données</button>
@@ -33,7 +34,7 @@
 <!-- Heatmap -->
 <div class="section-heatmap">
     <h3 class="heatmap-title">Heatmap interactive des points du dataset</h3>
-    <iframe src="{{ url_for('static', filename='VisualisationDeDonnee/Entree/heatmap_custom.html') }}" width="85%" height="1000px" frameborder="20"></iframe>
+    <iframe src="{{ url_for('static', filename='VisualisationDeDonnee/Entree/heatmap_custom.html') }}" width="85%" height="830px" frameborder="20"></iframe>
 </div>
     <style>
         .heatmap-frame, .heatmap-title {

@@ -87,6 +87,11 @@
     background-color: #c90127;
     transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
   }
+  .logo_main {
+    margin-left: -20px;
+    size:70%;
+}
+
 
 .section-titre, .section-presentation, .section-heatmap {
     display: flex;
