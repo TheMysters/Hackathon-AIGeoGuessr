@@ -23,15 +23,21 @@ Les modèles développés pour ce projet se basent sur le modèle DensetNet121 e
 
    ```bash
    python -m venv venv
+   ```
 
-3. Activez l'environnement virtuel: <br>
-   * Sur Windows:
-   ```bash
-   venv\Scripts\activate
+3. Activez l'environnement virtuel :
 
-  * Sur macOS/Linux:
-       ```bash
-       source venv/bin/activate
+   * Sur Windows :
+
+     ```bash
+     venv\Scripts\activate
+     ```
+
+   * Sur macOS/Linux :
+
+     ```bash
+     source venv/bin/activate
+     ```
 
 ## Installation des Librairies
 
@@ -39,10 +45,12 @@ Les modèles développés pour ce projet se basent sur le modèle DensetNet121 e
 2. Utilisez la commande suivante pour installer les dépendances à partir du fichier requirements.txt:
    ```bash
    pip install -r requirements.txt
+   ```
 
 ## Lancement de l'Application
 
 1. Une fois les dépendances installées, vous pouvez lancer l'application en utilisant la commande suivante:
    ```bash
    python app.py
+   ```
 2. Accédez à l'application à l'adresse http://localhost:5000 dans votre navigateur web.
